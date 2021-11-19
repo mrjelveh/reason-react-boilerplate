@@ -1,12 +1,14 @@
 type action =
-  | IsAuth
+  | Authenticated
+  | Guest
   | Pending;
 
 let auth = (state, action) =>
   switch action {
-  | IsAuth => action
-  | Pending => action
+    | Authenticated => state
+    | Guest => state
+    | Pending => state
   };
 
 
-let store = Reductive.Store.create(~reducer=auth, ~preloadedState={}, ());
+let store = Reductive.Store.create(~reducer=auth, ~preloadedState=Guest, ());
